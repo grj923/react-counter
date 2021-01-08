@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Counter</title>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!--React-->
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <!--React Dom-->
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <!--Babel-->
+    <script
+      crossorigin
+      src="https://unpkg.com/babel-standalone@6/babel.min.js"
+    ></script>
+
+    <script type="text/babel">
+      class Counter extends React.Component {
+        constructor(props) {
+          super(props);
+
+          this.state = {
+            count: props.intialCount || 0,
+          };
+        }
+        handleIncrement = (event) => {
+          if (this.state.count < 20) {
+            this.setState((state, props) => ({
+              count: state.count + 1,
+            }));
+          }
+        };
+        // handleIncrement = (event) => {
+        //   this.setState((state, props) => ({
+        //     count: state.count + 1,
+        //   }));
+        // };
+        handleDecrement = (event) => {
+          if (this.state.count > 0) {
+            this.setState((state, props) => ({
+              count: state.count - 1,
+            }));
+          }
+        };
+
+        // handleDecrement = (event) => {
+        //   this.setState((state, props) => ({
+        //     count: state.count - 1,
+        //   }));
+        // };
+
+        render() {
+          let countClassName = "";
+          if (this.state.count >= 10) {
+            countClassName = "special";
+          }
+          return (
+            <div>
+              <button onClick={this.handleDecrement}>-</button>
+              <span className={countClassName}>{this.state.count}</span>
+              <button onClick={this.handleIncrement}>+</button>
+            </div>
+          );
+        }
+      }
+
+      const element = <Counter intialCount={5} />;
+
+      ReactDOM.render(element, document.getElementById("root"));
+    </script>
+  </body>
+</html>
